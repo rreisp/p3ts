@@ -13,6 +13,7 @@ import com.meta.p3ts.domain.Cidade;
 import com.meta.p3ts.domain.Cliente;
 import com.meta.p3ts.domain.Endereco;
 import com.meta.p3ts.domain.Estado;
+import com.meta.p3ts.domain.ItemPedido;
 import com.meta.p3ts.domain.Pagamento;
 import com.meta.p3ts.domain.PagamentoComBoleto;
 import com.meta.p3ts.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.meta.p3ts.repositories.CidadeRepository;
 import com.meta.p3ts.repositories.ClienteRepository;
 import com.meta.p3ts.repositories.EnderecoRepository;
 import com.meta.p3ts.repositories.EstadoRepository;
+import com.meta.p3ts.repositories.ItemPedidoRepository;
 import com.meta.p3ts.repositories.PagamentoRepository;
 import com.meta.p3ts.repositories.PedidoRepository;
 import com.meta.p3ts.repositories.ProdutoRepository;
@@ -48,6 +50,8 @@ public class Main implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;	
 	@Autowired
 	private PagamentoRepository pagamentoRepository;	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;		
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
@@ -113,5 +117,19 @@ public class Main implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped1));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
 }
