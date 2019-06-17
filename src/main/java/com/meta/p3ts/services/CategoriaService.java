@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.meta.p3ts.domain.Categoria;
-import com.meta.p3ts.domain.Cliente;
 import com.meta.p3ts.dto.CategoriaDTO;
 import com.meta.p3ts.repositories.CategoriaRepository;
 import com.meta.p3ts.services.exceptions.DataIntegrityException;
