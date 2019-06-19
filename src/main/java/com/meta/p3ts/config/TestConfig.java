@@ -20,5 +20,5 @@ public class TestConfig {
 	public boolean instantiateDatabase() throws ParseException {
 		dbService.instantiateTestDatabase();
 		return true;
-	} 
+	}
 }
